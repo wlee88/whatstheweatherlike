@@ -1,7 +1,7 @@
 {
   "name": "whatstheweatherlike",
   "version": "1.0.0",
-  "description": "An experiment to see if I could automatically detect what the weather is currently like using command line/node.",
+  "description": "An experiment to see if I could automatically detect what the weather is currently like using one command.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
