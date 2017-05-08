@@ -1,0 +1,14 @@
+{
+  "name": "whatstheweatherlike",
+  "version": "1.0.0",
+  "description": "An experiment to see if I could automatically detect what the weather is currently like using command line/node.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "William Lee",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.60.0"
+  }
+}

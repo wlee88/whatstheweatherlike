@@ -1,9 +1,19 @@
 var request = require("request");
+var config = {
+  ipRequestServiceUrl: "http://ipinfo.io",
+  weatherServiceUrl: "http://api.openweathermap.org/data/2.5/weather?",
+  weatherServiceAppId: "4c897f9adcfc81fd6d14e6394e1a3910",
+  weatherServiceUnits: "metric"
+};
 
-var getWeather = (location) => {
+(function(request,config) {
+  "use strict";
+  var getWeather = (location) => {
   return new Promise((resolve, reject) => {
-    location = encodeURIComponent(location)// -- super useful and will encode spaces etc
-    var url = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=4c897f9adcfc81fd6d14e6394e1a3910&units=metric`;
+    var encodedLocation = encodeURIComponent(location)// -- super useful and will encode spaces etc
+    //var url = `http://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(location)}&appid=4c897f9adcfc81fd6d14e6394e1a3910&units=metric`;
+
+    var url = `${config.weatherServiceUrl}&q=${encodeURIComponent(location)}&appid=${config.weatherServiceAppId}&units=${config.weatherServiceUnits}`;
 
     if (!location) {
       return reject("No Location provided");
@@ -22,7 +32,7 @@ var getWeather = (location) => {
   });
 };
 var getLocation = () => {
-  var url = 'http://ipinfo.io';
+  var url = config.ipRequestServiceUrl;
   return new Promise((resolve, reject) => {
     request({
       url: url,
@@ -36,8 +46,7 @@ var getLocation = () => {
     });
   });
 };
-
-getLocation()
+getLocation(config.ipRequestServiceUrl)
   .then((location) => {
     return getWeather(location.city);
   })
@@ -47,4 +56,6 @@ getLocation()
   .catch((error) => {
     console.log(error);
   });
+
+})(request,config);
 
